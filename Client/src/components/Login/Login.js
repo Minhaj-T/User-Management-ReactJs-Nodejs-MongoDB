@@ -48,7 +48,7 @@ function Login() {
             <div className="card-img-left d-none d-md-flex"></div>
             <div className="card-body p-4 p-sm-5">
               <h5 className="card-title text-center mb-5 fw-light fs-3">
-                Now login 
+                Sign in
               </h5>
               <form onSubmit={handleLogin} method="post">
                 <div className="form-floating mb-3">
