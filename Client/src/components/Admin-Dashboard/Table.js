@@ -1,41 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 // import MaterialTable from 'material-table';
-import "./Table.css";
-import DataTable from "react-data-table-component";
-import axios from "axios";
-import Card from "@material-ui/core/Card";
-import Button from "@mui/material/Button";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import { useNavigate } from "react-router-dom";
+import './Table.css';
+import DataTable from 'react-data-table-component';
+import axios from 'axios';
+import Card from '@material-ui/core/Card';
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import { useNavigate } from 'react-router-dom';
 function Table() {
   const navigate = useNavigate();
   const [userDetails, setuserDetails] = useState([]);
   const [refresh, setRefresh] = useState(false);
-  const [search, setsearch] = useState("");
+  const [search, setsearch] = useState('');
   const [filterValue, setfilterValue] = useState([]);
   useEffect(() => {
-    const adminInfo = localStorage.getItem("admininfo");
+    const adminInfo = localStorage.getItem('admininfo');
     if (adminInfo) {
-      navigate("/admindashboard");
+      navigate('/admindashboard');
       (async function () {
         try {
           const config = {
             headers: {
-              "Content-type": "application/json",
+              'Content-type': 'application/json',
             },
           };
-
-          const { data } = await axios.get("/api/admin", config);
+          const { data } = await axios.get('/api/admin', config);
           console.log(data);
           setuserDetails(data);
+
           setfilterValue(data);
         } catch (error) {
           throw new error(error.response.data.message);
         }
       })();
     } else {
-      navigate("/admin");
+      navigate('/admin');
     }
   }, [refresh, navigate]);
 
@@ -48,23 +48,23 @@ function Table() {
 
   const deleteuser = async (userId) => {
     if (window.confirm(`Sure to Delete?`)) {
-    try {
-      const config = {
-        headers: {
-          "Content-type": "application/json",
-        },
-      };
-      await axios.delete("/api/admin/deleteuser", {
-        params: {
-          id: userId,
-        },
-        config,
-      });
-      setRefresh(!refresh);
-    } catch (error) {
-      throw new error(error.response.data.message);
+      try {
+        const config = {
+          headers: {
+            'Content-type': 'application/json',
+          },
+        };
+        await axios.delete('/api/admin/deleteuser', {
+          params: {
+            id: userId,
+          },
+          config,
+        });
+        setRefresh(!refresh);
+      } catch (error) {
+        throw new error(error.response.data.message);
+      }
     }
-  }
   };
 
   const editHandler = async (userId) => {
@@ -77,17 +77,17 @@ function Table() {
 
   const columns = [
     {
-      name: "Name",
+      name: 'Name',
       selector: (row) => row.name,
       sortable: true,
     },
     {
-      name: "Email",
+      name: 'Email',
       selector: (row) => row.email,
       sortable: true,
     },
     {
-      name: "",
+      name: '',
       cell: (row) => (
         <Button
           variant="outlined"
@@ -102,7 +102,7 @@ function Table() {
       ),
     },
     {
-      name: "",
+      name: '',
       cell: (row) => (
         <Button
           variant="outlined"
@@ -118,11 +118,11 @@ function Table() {
   return (
     <div
       className="d-flex justify-content-center"
-      style={{ marginTop: "150px" }}
+      style={{ marginTop: '150px' }}
     >
-      <Card style={{ height: "100%", width: "80%" }}>
+      <Card style={{ height: '100%', width: '80%' }}>
         <DataTable
-          title={"User Details"}
+          title={'User Details'}
           columns={columns}
           data={filterValue}
           pagination

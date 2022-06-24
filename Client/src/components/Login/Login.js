@@ -34,7 +34,7 @@ function Login() {
       }
     } catch (error) {
       seterror(error.response.data)
-      console.log(error.response.data);
+      console.log("thissisisi",error.response.data);
       
     }
   }
