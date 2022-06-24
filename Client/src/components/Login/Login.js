@@ -96,7 +96,7 @@ function Login() {
                     className="btn btn-lg btn-primary btn-login fw-bold text-uppercase"
                     type="submit"
                   >
-                    Login
+                    Sign in
                   </button>
                   <Link
                     className="d-block text-center mt-2 small"
