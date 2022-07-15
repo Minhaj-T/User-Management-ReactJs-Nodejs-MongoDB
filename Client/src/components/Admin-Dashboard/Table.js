@@ -26,7 +26,6 @@ function Table() {
             },
           };
           const { data } = await axios.get('/api/admin', config);
-          console.log(data);
           setuserDetails(data);
 
           setfilterValue(data);

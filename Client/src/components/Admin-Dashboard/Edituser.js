@@ -1,13 +1,13 @@
-import { React, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import "../Register/Register.css";
-import axios from "axios";
-import classname from "classnames";
+import { React, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import '../Register/Register.css';
+import axios from 'axios';
+import classname from 'classnames';
 
 function Edituser() {
   const navigate = useNavigate();
-  const [name, setname] = useState("");
-  const [email, setemail] = useState("");
+  const [name, setname] = useState('');
+  const [email, setemail] = useState('');
   const [error, seterror] = useState({});
   const userId = useParams();
 
@@ -17,7 +17,6 @@ function Edituser() {
         const { data } = await axios.get(
           `/api/admin/edituser/${userId.userId}`
         );
-        console.log(data);
         setname(data.name);
         setemail(data.email);
       })();
@@ -25,17 +24,16 @@ function Edituser() {
       throw new error(error.response.data.message);
     }
   }, []);
-  
-//   user details edit button
+
+  //   user details edit button
   let handleLogin = async (e) => {
     e.preventDefault();
     try {
       const config = {
         headers: {
-          "Content-type": "application/json",
+          'Content-type': 'application/json',
         },
       };
-      console.log(name, email);
       await axios.patch(
         `/api/admin/edituser/${userId.userId}`,
         {
@@ -45,7 +43,7 @@ function Edituser() {
         config
       );
       // localStorage.setItem("userinfo", JSON.stringify(data))
-      navigate("/admindashboard");
+      navigate('/admindashboard');
     } catch (error) {
       seterror(error.response.data);
     }
@@ -54,7 +52,7 @@ function Edituser() {
     <div className="container">
       <div className="row">
         <div
-          style={{ paddingTop: "7em" }}
+          style={{ paddingTop: '7em' }}
           className="col-lg-10 col-xl-9 mx-auto "
         >
           <div className="card flex-row  border-0 shadow rounded-3 overflow-hidden">
@@ -71,8 +69,8 @@ function Edituser() {
                     onChange={(e) => {
                       setname(e.target.value);
                     }}
-                    className={classname("form-control", {
-                      "is-invalid": error.name,
+                    className={classname('form-control', {
+                      'is-invalid': error.name,
                     })}
                     id="floatingInputUsername"
                     placeholder="myusername"
@@ -91,8 +89,8 @@ function Edituser() {
                     onChange={(e) => {
                       setemail(e.target.value);
                     }}
-                    className={classname("form-control", {
-                      "is-invalid": error.email,
+                    className={classname('form-control', {
+                      'is-invalid': error.email,
                     })}
                     id="floatingInputEmail"
                     placeholder="name@example.com"
